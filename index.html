@@ -323,7 +323,10 @@ const projects=[
   text:'Lauréat du 1er prix du Bal des projets d\'ESPRIT. Plateforme e-commerce intelligente pour la communauté ESPRIT : achat, vente, services et covoiturage entre étudiants. J\'y ai intégré 6 modèles de machine learning : recommandation de produits, estimation du temps de livraison, négociation, covoiturage et promotions panier.',
   more:'Architecture microservices, notifications en temps réel par WebSocket, contrôle d\'accès JWT/RBAC, déploiement avec Docker, Kubernetes et Jenkins.',
   stack:'Angular · Spring Boot · FastAPI · MongoDB · scikit-learn · Docker · Kubernetes',
-  links:[['Voir la démo vidéo','https://www.linkedin.com/feed/update/urn:li:activity:7459685867562061824/'],['Code sur GitHub',GH+'eyaweslati79/Esprit-Market']]},
+  links:[['Voir la publication LinkedIn','https://www.linkedin.com/feed/update/urn:li:activity:7459685867562061824/'],['Code sur GitHub',GH+'eyaweslati79/Esprit-Market']],
+  video:['espritmarket-demo','Démo complète de la plateforme (2 min 46)'],
+  shots:[['espritmarket-offre','Négociation : faire une offre au vendeur'],['espritmarket-admin-livraisons','Back-office : suivi des livraisons']],
+  note:'Démo de la plateforme réalisée par l\'équipe.'},
  {id:'parentconnect',name:'ParentConnect',ctx:'Projet académique · 2026',tag:'Équipe de 6',
   text:'Plateforme d\'entraide entre parents : événements, garde d\'enfants, marketplace, messagerie. J\'ai développé le microservice Events, de la base de données à l\'API.',
   more:'Architecture microservices complète : API Gateway, Eureka, Config Server, Keycloak, RabbitMQ.',
@@ -354,7 +357,7 @@ document.getElementById('list').innerHTML=projects.map(p=>`
   <div><span class="meta">${p.ctx}</span><h3>${p.name}</h3><span class="tag">${p.tag}</span></div>
   <div><p>${p.text}</p><p>${p.more}</p><p class="stack-line">${p.stack}</p></div>
   <div class="links">${p.links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>
-  ${p.shots?`<div class="shots">${p.video?`<figure class="big"><video controls muted playsinline preload="none" poster="video/${p.video[0]}.jpg" width="1280" height="800"><source src="video/${p.video[0]}.mp4" type="video/mp4"></video><figcaption>${p.video[1]}</figcaption></figure>`:''}${(p.video?p.shots.slice(0,2):p.shots).map(([f,alt],i)=>`<figure${i===0&&!p.video?' class="big"':''}><a href="img/${f}.jpg" target="_blank" rel="noopener"><img src="img/${f}.jpg" alt="${alt}" loading="lazy" width="1600" height="1000"></a><figcaption>${alt}</figcaption></figure>`).join('')}<p class="note">${p.video?'Démo et captures':'Captures'} de l'application lancée depuis son code, avec des données de démonstration.</p></div>`:''}
+  ${p.shots?`<div class="shots">${p.video?`<figure class="big"><video controls playsinline preload="none" poster="video/${p.video[0]}.jpg" width="1280" height="800"><source src="video/${p.video[0]}.mp4" type="video/mp4"></video><figcaption>${p.video[1]}</figcaption></figure>`:''}${(p.video?p.shots.slice(0,2):p.shots).map(([f,alt],i)=>`<figure${i===0&&!p.video?' class="big"':''}><a href="img/${f}.jpg" target="_blank" rel="noopener"><img src="img/${f}.jpg" alt="${alt}" loading="lazy" width="1600" height="1000"></a><figcaption>${alt}</figcaption></figure>`).join('')}<p class="note">${p.note||((p.video?'Démo et captures':'Captures')+' de l\'application lancée depuis son code, avec des données de démonstration.')}</p></div>`:''}
  </article>`).join('');
 
 const S={cv:['CV','CV_Eya_Weslati.pdf'],emv:['Chatbot EMV','#emv'],em:['EspritMarket','#espritmarket'],pc:['ParentConnect','#parentconnect'],card:['Cardify','#cardify'],skills:['Compétences','#competences'],contact:['Contact','#contact'],parc:['Parcours','#parcours']};
