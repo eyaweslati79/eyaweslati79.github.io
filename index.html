@@ -118,6 +118,10 @@ nav a:hover{color:var(--rose-ink)}
 #first{margin-bottom:clamp(36px,5vw,64px)}
 #first .proj{border-bottom:1px solid var(--line)}
 
+.award{margin:18px 0 0;max-width:260px}
+.award img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
+.award figcaption{font:14px/1.4 "Familjen Grotesk",sans-serif;color:var(--soft);margin-top:6px}
+
 /* timeline */
 .alt{background:var(--rose-2)}
 .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px)}
@@ -331,7 +335,8 @@ const projects=[
   links:[['Voir la publication LinkedIn','https://www.linkedin.com/feed/update/urn:li:activity:7459685867562061824/'],['Code sur GitHub',GH+'eyaweslati79/Esprit-Market']],
   video:['espritmarket-demo','Démo complète de la plateforme (2 min 46)'],
   shots:[['espritmarket-offre','Négociation : faire une offre au vendeur'],['espritmarket-admin-livraisons','Back-office : suivi des livraisons']],
-  note:'Démo de la plateforme réalisée par l\'équipe.'},
+  note:'Démo de la plateforme réalisée par l\'équipe.',
+  award:['espritmarket-premier-prix','Remise du 1er prix au Bal des projets 2026']},
  {id:'parentconnect',name:'ParentConnect',ctx:'Projet académique · 2026',tag:'Équipe de 6',
   text:'Plateforme d\'entraide entre parents : événements, garde d\'enfants, marketplace, messagerie. J\'ai développé le microservice Events, de la base de données à l\'API.',
   more:'Architecture microservices complète : API Gateway, Eureka, Config Server, Keycloak, RabbitMQ.',
@@ -359,7 +364,7 @@ const projects=[
 ];
 const card=p=>`
  <article class="proj" id="${p.id}">
-  <div><span class="meta">${p.ctx}</span><h3>${p.name}</h3><span class="tag">${p.tag}</span></div>
+  <div><span class="meta">${p.ctx}</span><h3>${p.name}</h3><span class="tag">${p.tag}</span>${p.award?`<figure class="award"><a href="img/${p.award[0]}.jpg" target="_blank" rel="noopener"><img src="img/${p.award[0]}.jpg" alt="Eya Weslati tenant le certificat du 1er prix au Bal des projets d'ESPRIT" loading="lazy" width="960" height="1280"></a><figcaption>${p.award[1]}</figcaption></figure>`:''}</div>
   <div><p>${p.text}</p><p>${p.more}</p><p class="stack-line">${p.stack}</p></div>
   <div class="links">${p.links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>
   ${p.shots?`<div class="shots">${p.video?`<figure class="big"><video controls playsinline preload="none" poster="video/${p.video[0]}.jpg" width="1280" height="800"><source src="video/${p.video[0]}.mp4" type="video/mp4"></video><figcaption>${p.video[1]}</figcaption></figure>`:''}${(p.video?p.shots.slice(0,2):p.shots).map(([f,alt],i)=>`<figure${i===0&&!p.video?' class="big"':''}><a href="img/${f}.jpg" target="_blank" rel="noopener"><img src="img/${f}.jpg" alt="${alt}" loading="lazy" width="1600" height="1000"></a><figcaption>${alt}</figcaption></figure>`).join('')}<p class="note">${p.note||((p.video?'Démo et captures':'Captures')+' de l\'application lancée depuis son code, avec des données de démonstration.')}</p></div>`:''}
