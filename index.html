@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eya Weslati — Portfolio</title>
+<meta name="description" content="Eya Weslati, élève ingénieure en génie logiciel à ESPRIT. Full Stack, IA et DevOps : Spring Boot, FastAPI, Angular, RAG, Docker, Kubernetes. À la recherche d'un stage PFE.">
+<meta property="og:title" content="Eya Weslati — Ingénieure logiciel Full Stack · IA · DevOps">
+<meta property="og:description" content="Projets, parcours et compétences. À la recherche d'un stage de fin d'études.">
+<meta property="og:image" content="eya-weslati.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: précise et chaleureuse, une ingénieure qui montre des preuves, pas des slogans.
+   IDEA: la page répond comme son chatbot RAG : on pose une question, la réponse cite ses sources.
+   PICTURE: le portrait à côté d'un panneau de questions-réponses sourcées.
+   COLOUR and TYPE: rose poudré de la photo en grand aplat, prune profond pour l'encre, sarcelle pour les sources ; Familjen Grotesk + Newsreader.
+   LAYOUT: bandeau rose plein écran, projets en rangées éditoriales, parcours en liste à dates suspendues. */
+:root{color-scheme:light dark;
+ --bg:light-dark(#ffffff,#1a1120);
+ --ink:light-dark(#2b1a2e,#f3e6ec);
+ --soft:light-dark(#6d5a70,#c2aebb);
+ --rose:light-dark(#ebcfd7,#3a2432);
+ --rose-2:light-dark(#f7e9ed,#24161f);
+ --rose-ink:light-dark(#a4566d,#e7a9bd);
+ --teal:light-dark(#1d6863,#7fd0c6);
+ --teal-bg:light-dark(#e2f1ef,#173230);
+ --line:light-dark(#ead9df,#3a2a36);
+ --card:light-dark(#ffffff,#22161f)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Newsreader",Georgia,serif;overflow-x:clip}
+h1,h2,h3,nav,.ui,button,.btn,dt,.meta,.stack-line,.tag{font-family:"Familjen Grotesk",system-ui,sans-serif}
+h1,h2,h3{margin:0;line-height:1.05;text-wrap:balance;font-weight:600}
+h2{font-size:clamp(32px,4.4vw,48px);letter-spacing:-.02em}
+h3{font-size:clamp(22px,2.4vw,28px);letter-spacing:-.01em}
+p{margin:0 0 1em}
+a{color:var(--teal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(48px,7vw,104px) max(5vw,16px)}
+
+/* nav */
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--rose) 88%,transparent);backdrop-filter:blur(10px)}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 26px;padding:14px max(5vw,16px);max-width:1240px;margin:0 auto;font-size:16px}
+nav .me{font-weight:700;margin-right:auto;color:var(--ink);text-decoration:none;font-size:18px}
+nav a{color:var(--ink);text-decoration:none;padding:6px 0}
+.links-nav{display:flex;flex-wrap:wrap;gap:4px 24px}
+nav a:hover{color:var(--rose-ink)}
+
+/* hero */
+.hero{background:var(--rose);padding-top:clamp(28px,4vw,56px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:end}
+.portrait{margin:0;position:relative}
+.portrait img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:220px 220px 18px 18px}
+.portrait figcaption{font:500 14px "Familjen Grotesk",sans-serif;color:var(--soft);margin-top:12px}
+.intro h1{font-size:clamp(52px,8vw,104px);letter-spacing:-.035em;font-weight:700;line-height:.95}
+.role{font:500 clamp(19px,2vw,23px)/1.35 "Familjen Grotesk",sans-serif;margin:16px 0 26px;max-width:34ch}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none;border:2px solid var(--ink);color:var(--ink)}
+.btn.main{background:var(--ink);color:var(--rose)}
+.btn:hover{background:var(--ink);color:var(--rose)}
+
+/* ask panel */
+.ask{background:var(--card);border-radius:18px;padding:clamp(18px,2.4vw,28px);box-shadow:0 1px 0 var(--line),0 18px 40px -24px rgba(60,20,50,.35)}
+.ask-head{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font:500 14px "Familjen Grotesk",sans-serif;color:var(--soft);margin-bottom:14px}
+.q{font:600 clamp(19px,2vw,22px)/1.3 "Familjen Grotesk",sans-serif;margin:0 0 10px}
+.a{min-height:7.2em;margin:0 0 14px;font-size:18px}
+.a sup a{font:600 12px "Familjen Grotesk",sans-serif;background:var(--teal-bg);padding:1px 6px;border-radius:5px;text-decoration:none;margin-left:2px}
+.src{display:flex;flex-wrap:wrap;gap:6px 16px;font:14px "Familjen Grotesk",sans-serif;color:var(--soft);border-top:1px solid var(--line);padding-top:12px;margin:0 0 16px}
+.src a{color:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font-size:15px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--rose-2);color:var(--ink);cursor:pointer}
+.chips button:hover{border-color:var(--rose-ink)}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+
+/* section heads */
+.head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(16px,4vw,64px);margin-bottom:clamp(28px,4vw,48px);align-items:end}
+.head p{color:var(--soft);margin:0;max-width:60ch}
+
+/* featured project */
+.feat{background:var(--ink);color:var(--bg);border-radius:24px;padding:clamp(24px,4vw,52px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);margin-bottom:clamp(36px,5vw,64px)}
+.feat .meta{color:var(--rose)}
+.feat h3{font-size:clamp(28px,3.4vw,40px);margin:8px 0 16px}
+.feat a{color:var(--rose)}
+.feat ul{margin:0 0 18px;padding-left:1.1em}
+.feat li{margin-bottom:6px}
+.figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;align-content:start;border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent)}
+.figs div{padding:18px 0;border-bottom:1px solid color-mix(in srgb,var(--bg) 25%,transparent)}
+.figs div:nth-child(odd){padding-right:16px}
+.figs b{display:block;font:700 clamp(34px,4vw,48px)/1 "Familjen Grotesk",sans-serif;color:var(--rose);letter-spacing:-.02em;white-space:nowrap}
+.figs span{font:15px/1.35 "Familjen Grotesk",sans-serif;opacity:.85}
+.meta{font-size:15px;color:var(--soft);font-weight:500}
+.stack-line{font-size:15px;color:var(--soft);margin:0}
+.feat .stack-line{color:var(--bg);opacity:.8}
+
+/* project rows */
+.proj{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr) minmax(0,2fr);gap:clamp(14px,3vw,40px);padding:clamp(22px,3vw,34px) 0;border-top:1px solid var(--line)}
+.proj:last-child{border-bottom:1px solid var(--line)}
+.proj h3{margin:6px 0 0}
+.proj .tag{display:inline-block;font-size:14px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--rose-2);color:var(--rose-ink);margin-top:12px}
+.proj p{margin:0 0 10px}
+.proj .links{display:flex;flex-direction:column;gap:8px;font:500 15px "Familjen Grotesk",sans-serif;align-items:flex-start}
+
+/* timeline */
+.alt{background:var(--rose-2)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px)}
+.cols h3{margin-bottom:18px;font-size:22px}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.tl time{font:600 15px/1.5 "Familjen Grotesk",sans-serif;color:var(--rose-ink)}
+.tl strong{font:600 18px/1.3 "Familjen Grotesk",sans-serif;display:block}
+.tl em{font-style:normal;color:var(--soft);display:block;margin-bottom:4px}
+.tl p{margin:0}
+
+/* skills */
+dl.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px clamp(20px,3vw,48px);margin:0}
+dl.skills div{border-top:2px solid var(--ink);padding-top:12px}
+dt{font-weight:600;font-size:17px;margin-bottom:6px}
+dd{margin:0;color:var(--soft)}
+.certs{margin-top:clamp(36px,5vw,56px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px)}
+.certs ul{margin:0;padding-left:1.1em}
+.certs li{margin-bottom:6px}
+
+/* contact */
+.contact{background:var(--rose)}
+.contact h2{font-size:clamp(36px,5.4vw,64px);max-width:16ch}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end}
+.clist{list-style:none;margin:0;padding:0;font:500 18px "Familjen Grotesk",sans-serif}
+.clist li{padding:12px 0;border-top:1px solid color-mix(in srgb,var(--ink) 20%,transparent);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.clist span{color:var(--soft)}
+.clist a{color:var(--ink);overflow-wrap:anywhere}
+footer{padding:22px max(5vw,16px);font:14px "Familjen Grotesk",sans-serif;color:var(--soft);text-align:center}
+
+@media(max-width:900px){
+ .feat,.certs,.contact .wrap,.head{grid-template-columns:minmax(0,1fr)}
+ .proj{grid-template-columns:minmax(0,1fr)}
+ .proj .links{flex-direction:row;flex-wrap:wrap;gap:16px}
+ dl.skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:720px){
+ .hero .wrap{grid-template-columns:minmax(0,1fr)}
+ .portrait{max-width:340px}
+ .cols{grid-template-columns:minmax(0,1fr)}
+ nav .links-nav{width:100%;display:flex;gap:20px;overflow-x:auto}
+}
+@media(max-width:600px){
+ dl.skills{grid-template-columns:minmax(0,1fr)}
+ .tl li{grid-template-columns:minmax(0,1fr);gap:2px}
+ body{font-size:16px}
+}
+@keyframes caret{50%{opacity:0}}
+.typing::after{content:"";display:inline-block;width:2px;height:1em;background:var(--teal);margin-left:2px;vertical-align:-2px;animation:caret 1s steps(1) infinite}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.typing::after{animation:none}}
+</style>
+</head>
+<body>
+<header>
+ <nav aria-label="Navigation principale">
+  <a class="me" href="#top">Eya Weslati</a>
+  <span class="links-nav">
+   <a href="#projets">Projets</a>
+   <a href="#parcours">Parcours</a>
+   <a href="#competences">Compétences</a>
+   <a href="#contact">Contact</a>
+  </span>
+ </nav>
+</header>
+
+<main id="top">
+<section class="band hero" aria-label="Présentation">
+ <div class="wrap">
+  <figure class="portrait">
+   <img src="eya-weslati.jpg" alt="Portrait d'Eya Weslati" width="720" height="900">
+   <figcaption>Korba, Nabeul · Tunisie</figcaption>
+  </figure>
+  <div class="intro">
+   <h1>Eya Weslati</h1>
+   <p class="role">Élève ingénieure en génie logiciel à ESPRIT. Je construis des applications Full Stack, des systèmes d'IA et leur déploiement.</p>
+   <div class="btns">
+    <a class="btn main" href="#contact">Me contacter</a>
+    <a class="btn" href="CV_Eya_Weslati.pdf" target="_blank" rel="noopener">Voir mon CV</a>
+   </div>
+   <div class="ask" aria-live="polite">
+    <div class="ask-head ui"><span>Posez-moi une question</span><span>Réponses tirées de mon CV et de mes projets</span></div>
+    <p class="q" id="q">Qui êtes-vous ?</p>
+    <p class="a" id="a"></p>
+    <p class="src" id="src"></p>
+    <div class="chips ui" id="chips" role="group" aria-label="Questions suggérées"></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="projets">
+ <div class="wrap">
+  <div class="head">
+   <h2>Projets</h2>
+   <p>Un stage en entreprise, des projets académiques en équipe et une application mobile. Pour chacun : ce que j'ai fait, avec quoi, et où voir le code.</p>
+  </div>
+
+  <article class="feat" id="emv">
+   <div>
+    <span class="meta">Stage chez TELNET · juillet à septembre 2026 · réalisé seule</span>
+    <h3>Chatbot EMV : poser une question à 558 pages de spécifications</h3>
+    <p>Les développeurs et nouveaux arrivants perdaient du temps à chercher dans la documentation technique EMV. J'ai conçu un assistant qui répond en citant ses sources, et qui refuse de répondre quand la question sort de la documentation.</p>
+    <ul>
+     <li>Pipeline documentaire complet : extraction PDF, découpage, embeddings, recherche vectorielle dans Qdrant, génération par un LLM.</li>
+     <li>API REST Java/Spring Boot de 22 endpoints, service IA en Python/FastAPI, interface Angular, MongoDB.</li>
+     <li>100 tests automatisés et un jeu de 30 questions pour mesurer la qualité des réponses.</li>
+    </ul>
+    <p class="stack-line">Spring Boot · FastAPI · Angular · MongoDB · Qdrant · LLM · Docker</p>
+    <p class="stack-line" style="margin-top:10px">Code privé, propriété de l'entreprise.</p>
+   </div>
+   <div class="figs" aria-label="Résultats mesurés">
+    <div><b>~2,2 s</b><span>par réponse sourcée</span></div>
+    <div><b>90 %</b><span>de réponses correctes sur 30 questions de test</span></div>
+    <div><b>100 %</b><span>de refus corrects hors périmètre</span></div>
+    <div><b>558</b><span>pages, 3 spécifications indexées</span></div>
+   </div>
+  </article>
+
+  <div id="list"></div>
+ </div>
+</section>
+
+<section class="band alt" id="parcours">
+ <div class="wrap">
+  <div class="head"><h2>Parcours</h2><p>Trois stages, du support informatique bancaire à l'IA appliquée, et une formation d'ingénieure orientée Full Stack, IA et DevOps.</p></div>
+  <div class="cols">
+   <div>
+    <h3>Expériences</h3>
+    <ol class="tl" reversed>
+     <li><time>Juil. – sept. 2026</time><div><strong>Stagiaire ingénieure logiciel</strong><em>TELNET Inc. (groupe TELNET)</em><p>Chatbot RAG pour la documentation EMV, conçu et développé seule, de l'API à l'interface. <a href="#emv">Voir le projet</a></p></div></li>
+     <li><time>Sept. – oct. 2025</time><div><strong>Stagiaire, direction informatique</strong><em>Banque de Tunisie</em><p>Support technique aux utilisateurs, diagnostic et résolution d'incidents dans l'environnement IT bancaire.</p></div></li>
+     <li><time>Juin – août 2025</time><div><strong>Stagiaire développeuse mobile</strong><em>ESPRIT</em><p>Application Flutter qui scanne des cartes de visite par OCR et les transforme en contacts. <a href="#cardify">Voir le projet</a></p></div></li>
+    </ol>
+   </div>
+   <div>
+    <h3>Formation</h3>
+    <ol class="tl" reversed>
+     <li><time>2024 – aujourd'hui</time><div><strong>Cycle d'ingénieur, génie logiciel</strong><em>ESPRIT, École Supérieure Privée d'Ingénierie et de Technologies</em><p>Développement web et mobile, architectures logicielles et applications distribuées, Machine Learning, MLOps, Big Data, Docker, Kubernetes, Azure, AWS.</p></div></li>
+     <li><time>2022 – 2024</time><div><strong>Cycle préparatoire aux études d'ingénieur</strong><em>IPEIN, Institut Préparatoire aux Études d'Ingénieurs de Nabeul</em><p>Admise aux Concours Nationaux d'Entrée aux Cycles de Formation d'Ingénieurs, session 2024.</p></div></li>
+    </ol>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="band" id="competences">
+ <div class="wrap">
+  <div class="head"><h2>Compétences</h2><p>Les outils que j'ai utilisés en projet, du back-end au déploiement.</p></div>
+  <dl class="skills">
+   <div><dt>Langages</dt><dd>Java, Python, TypeScript, C#, PHP, Dart, SQL</dd></div>
+   <div><dt>Back-end</dt><dd>Spring Boot, FastAPI, .NET, Symfony, API REST, microservices, JWT/RBAC, WebSocket</dd></div>
+   <div><dt>Front-end et mobile</dt><dd>Angular, Flutter</dd></div>
+   <div><dt>IA et data</dt><dd>LLM, RAG, embeddings, OCR, Machine Learning, Deep Learning, MLOps, Big Data, Business Intelligence</dd></div>
+   <div><dt>Bases de données</dt><dd>MongoDB, PostgreSQL, Qdrant (base vectorielle)</dd></div>
+   <div><dt>DevOps et cloud</dt><dd>Docker, Kubernetes, Git/GitHub, Azure, AWS</dd></div>
+  </dl>
+  <div class="certs">
+   <div>
+    <h3 style="font-size:22px;margin-bottom:14px">Certifications</h3>
+    <ul>
+     <li>Microsoft Azure Fundamentals (AZ-900)</li>
+     <li>AWS Cloud Practitioner, AWS Academy Graduate – Cloud Foundations</li>
+     <li>The Hashgraph Association : Hedera Certified Developer Associate (HCDA), Hedera Certified Foundation (HCF), Hedera Business Foundation (HBF)</li>
+     <li>Formations Docker et bases de Kubernetes</li>
+    </ul>
+   </div>
+   <div>
+    <h3 style="font-size:22px;margin-bottom:14px">Langues</h3>
+    <ul>
+     <li>Arabe : langue maternelle</li>
+     <li>Français : avancé</li>
+     <li>Anglais : avancé</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="band contact" id="contact">
+ <div class="wrap">
+  <div>
+   <h2>Je cherche un stage de fin d'études en Full Stack, IA ou DevOps.</h2>
+   <p class="role" style="margin-bottom:0">Écrivez-moi pour en parler : je réponds rapidement.</p>
+  </div>
+  <ul class="clist">
+   <li><span>E-mail</span><a href="mailto:aweslati95@gmail.com">aweslati95@gmail.com</a></li>
+   <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/eya-weslati2002" target="_blank" rel="noopener">in/eya-weslati2002</a></li>
+   <li><span>GitHub</span><a href="https://github.com/eyaweslati79" target="_blank" rel="noopener">eyaweslati79</a></li>
+   <li><span>CV</span><a href="CV_Eya_Weslati.pdf" target="_blank" rel="noopener">CV_Eya_Weslati.pdf</a></li>
+  </ul>
+ </div>
+</section>
+</main>
+<footer>© 2026 Eya Weslati</footer>
+
+<script>
+{
+const GH='https://github.com/';
+const projects=[
+ {id:'espritmarket',name:'EspritMarket',ctx:'Projet académique · 2025 – 2026',tag:'Projet d\'équipe',
+  text:'Plateforme e-commerce intelligente pour la communauté ESPRIT : achat, vente, services et covoiturage entre étudiants. J\'y ai intégré 6 modèles de machine learning : recommandation de produits, estimation du temps de livraison, négociation, covoiturage et promotions panier.',
+  more:'Architecture microservices, notifications en temps réel par WebSocket, contrôle d\'accès JWT/RBAC, déploiement avec Docker, Kubernetes et Jenkins.',
+  stack:'Angular · Spring Boot · FastAPI · MongoDB · scikit-learn · Docker · Kubernetes',
+  links:[['Voir la démo vidéo','https://www.linkedin.com/in/eya-weslati2002/recent-activity/all/'],['Code sur GitHub',GH+'eyaweslati79/Esprit-Market']]},
+ {id:'parentconnect',name:'ParentConnect',ctx:'Projet académique · 2026',tag:'Équipe de 6',
+  text:'Plateforme d\'entraide entre parents : événements, garde d\'enfants, marketplace, messagerie. J\'ai développé le microservice Events, de la base de données à l\'API.',
+  more:'Architecture microservices complète : API Gateway, Eureka, Config Server, Keycloak, RabbitMQ.',
+  stack:'Java · Spring Boot · PostgreSQL · Docker · Keycloak',
+  links:[['Code sur GitHub',GH+'FarahZekri11/ParentConnect/tree/INTEGRATION-FINAL']]},
+ {id:'cardify',name:'Cardify',ctx:'Stage ESPRIT · juin à août 2025',tag:'Réalisé seule',
+  text:'Application mobile qui scanne une carte de visite avec l\'appareil photo, reconnaît le texte par OCR et crée un contact structuré : nom, poste, téléphone, e-mail.',
+  more:'Connexion Firebase et Google, favoris, export des contacts, stockage local hors ligne. Testée sur émulateur et sur un vrai téléphone Android.',
+  stack:'Flutter · Dart · Google ML Kit (OCR) · Firebase Auth · Hive',
+  links:[['Code sur GitHub',GH+'eyaweslati79/CARDIFY']]},
+ {id:'musehub',name:'MuseHub',ctx:'Projet académique · 2025',tag:'Projet d\'équipe',
+  text:'Musée numérique et communauté d\'artistes : galerie d\'œuvres, événements avec export vers l\'agenda, marketplace, publications et commentaires, avec un back-office d\'administration.',
+  more:'Application web et API REST sécurisée par JWT, envoi d\'e-mails, réinitialisation de mot de passe.',
+  stack:'PHP · Symfony · Twig · Doctrine · API REST · JWT',
+  links:[['Code sur GitHub',GH+'lookism-12/MuseHub']]},
+ {id:'wego',name:'weGo',ctx:'Projet académique · 2025',tag:'Projet d\'équipe',
+  text:'Application de bureau de covoiturage : publication et recherche de trajets, réservations, paiements et factures, carte des trajets, messagerie et simulation de l\'empreinte CO2.',
+  more:'Notifications par SMS et e-mail, export PDF, tableau de bord de statistiques.',
+  stack:'Java · JavaFX · Maven · MySQL · Twilio · JavaMail',
+  links:[['Code sur GitHub',GH+'wassimzarai/weGo']]}
+];
+document.getElementById('list').innerHTML=projects.map(p=>`
+ <article class="proj" id="${p.id}">
+  <div><span class="meta">${p.ctx}</span><h3>${p.name}</h3><span class="tag">${p.tag}</span></div>
+  <div><p>${p.text}</p><p>${p.more}</p><p class="stack-line">${p.stack}</p></div>
+  <div class="links">${p.links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>
+ </article>`).join('');
+
+const S={cv:['CV','CV_Eya_Weslati.pdf'],emv:['Chatbot EMV','#emv'],em:['EspritMarket','#espritmarket'],pc:['ParentConnect','#parentconnect'],card:['Cardify','#cardify'],skills:['Compétences','#competences'],contact:['Contact','#contact'],parc:['Parcours','#parcours']};
+const QA=[
+ {q:'Qui êtes-vous ?',a:'Je suis élève ingénieure en génie logiciel à ESPRIT [parc]. Je travaille sur tout le chemin d\'une application : l\'API, l\'interface, l\'IA et le déploiement. Mon dernier stage m\'a fait construire seule un chatbot RAG complet chez TELNET [emv].',s:['parc','emv']},
+ {q:'Qu\'avez-vous construit en IA ?',a:'Un chatbot RAG qui répond sur 558 pages de spécifications EMV en ~2,2 s, avec 90 % de bonnes réponses sur 30 questions de test [emv]. Et 6 modèles de machine learning intégrés à une plateforme e-commerce : recommandation, temps de livraison, négociation [em].',s:['emv','em']},
+ {q:'Quelle est votre stack ?',a:'Java/Spring Boot et Python/FastAPI côté back-end, Angular et Flutter côté interface, MongoDB, PostgreSQL et Qdrant pour les données, Docker, Kubernetes, Azure et AWS pour le déploiement [skills].',s:['skills','em']},
+ {q:'Travaillez-vous en équipe ?',a:'Oui. Sur ParentConnect, en équipe de 6, j\'ai pris en charge le microservice Events dans une architecture microservices [pc]. EspritMarket, MuseHub et weGo sont aussi des projets d\'équipe [em].',s:['pc','em']},
+ {q:'Êtes-vous disponible ?',a:'Je cherche un stage de fin d\'études (PFE) en Full Stack, IA ou DevOps. Écrivez-moi à aweslati95@gmail.com ou sur LinkedIn [contact].',s:['contact','cv']}
+];
+const qEl=document.getElementById('q'),aEl=document.getElementById('a'),sEl=document.getElementById('src'),cEl=document.getElementById('chips');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let timer=null;
+const cite=t=>t.replace(/\[(\w+)\]/g,(m,k)=>{const i=Object.keys(S).indexOf(k)+1;return `<sup><a href="${S[k][1]}" aria-label="Source : ${S[k][0]}">${S[k][0]}</a></sup>`});
+const show=i=>{
+ const item=QA[i];
+ qEl.textContent=item.q;
+ cEl.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
+ sEl.innerHTML='Sources : '+item.s.map(k=>`<a href="${S[k][1]}"${k==='cv'?' target="_blank" rel="noopener"':''}>${S[k][0]}</a>`).join('');
+ clearInterval(timer);
+ const plain=item.a.replace(/\s?\[\w+\]/g,'');
+ if(reduce){aEl.innerHTML=cite(item.a);return}
+ let n=0;aEl.classList.add('typing');aEl.textContent='';
+ timer=setInterval(()=>{n+=3;aEl.textContent=plain.slice(0,n);if(n>=plain.length){clearInterval(timer);aEl.classList.remove('typing');aEl.innerHTML=cite(item.a)}},16);
+};
+cEl.innerHTML=QA.map((x,i)=>`<button type="button" aria-pressed="false" data-i="${i}">${x.q}</button>`).join('');
+cEl.addEventListener('click',e=>{const b=e.target.closest('button');if(b)show(+b.dataset.i)});
+show(0);
+}
+</script>
+</body>
+</html>
