@@ -104,6 +104,14 @@ nav a:hover{color:var(--rose-ink)}
 .proj p{margin:0 0 10px}
 .proj .links{display:flex;flex-direction:column;gap:8px;font:500 15px "Familjen Grotesk",sans-serif;align-items:flex-start}
 
+.shots{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);grid-template-rows:auto auto auto;gap:14px 18px;margin-top:8px}
+.shots figure{margin:0}
+.shots figure.big{grid-row:1/3}
+.shots img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(60,20,50,.45)}
+.shots figcaption{font:14px/1.4 "Familjen Grotesk",sans-serif;color:var(--soft);margin-top:6px}
+.shots .note{grid-column:1/-1;font:14px "Familjen Grotesk",sans-serif;color:var(--soft);margin:0}
+@media(max-width:720px){.shots{grid-template-columns:minmax(0,1fr)}.shots figure.big{grid-row:auto}}
+
 /* timeline */
 .alt{background:var(--rose-2)}
 .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px)}
@@ -312,7 +320,8 @@ const projects=[
   text:'Plateforme d\'entraide entre parents : événements, garde d\'enfants, marketplace, messagerie. J\'ai développé le microservice Events, de la base de données à l\'API.',
   more:'Architecture microservices complète : API Gateway, Eureka, Config Server, Keycloak, RabbitMQ.',
   stack:'Java · Spring Boot · PostgreSQL · Docker · Keycloak',
-  links:[['Code sur GitHub',GH+'FarahZekri11/ParentConnect/tree/INTEGRATION-FINAL']]},
+  links:[['Code sur GitHub',GH+'FarahZekri11/ParentConnect/tree/INTEGRATION-FINAL']],
+  shots:[['parentconnect-evenements','Liste des événements de quartier, avec filtres et places restantes'],['parentconnect-detail','Détail d\'un événement et formulaire d\'inscription'],['parentconnect-accueil','Page d\'accueil de ParentConnect']]},
  {id:'cardify',name:'Cardify',ctx:'Stage ESPRIT · juin à août 2025',tag:'Réalisé seule',
   text:'Application mobile qui scanne une carte de visite avec l\'appareil photo, reconnaît le texte par OCR et crée un contact structuré : nom, poste, téléphone, e-mail.',
   more:'Connexion Firebase et Google, favoris, export des contacts, stockage local hors ligne. Testée sur émulateur et sur un vrai téléphone Android.',
@@ -334,6 +343,7 @@ document.getElementById('list').innerHTML=projects.map(p=>`
   <div><span class="meta">${p.ctx}</span><h3>${p.name}</h3><span class="tag">${p.tag}</span></div>
   <div><p>${p.text}</p><p>${p.more}</p><p class="stack-line">${p.stack}</p></div>
   <div class="links">${p.links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>
+  ${p.shots?`<div class="shots">${p.shots.map(([f,alt],i)=>`<figure${i===0?' class="big"':''}><a href="img/${f}.jpg" target="_blank" rel="noopener"><img src="img/${f}.jpg" alt="${alt}" loading="lazy" width="1600" height="1000"></a><figcaption>${alt}</figcaption></figure>`).join('')}<p class="note">Captures de l'application lancée depuis son code, avec des données de démonstration.</p></div>`:''}
  </article>`).join('');
 
 const S={cv:['CV','CV_Eya_Weslati.pdf'],emv:['Chatbot EMV','#emv'],em:['EspritMarket','#espritmarket'],pc:['ParentConnect','#parentconnect'],card:['Cardify','#cardify'],skills:['Compétences','#competences'],contact:['Contact','#contact'],parc:['Parcours','#parcours']};
