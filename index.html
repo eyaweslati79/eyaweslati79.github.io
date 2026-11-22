@@ -107,6 +107,7 @@ nav a:hover{color:var(--rose-ink)}
 .shots{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);grid-template-rows:auto auto auto;gap:14px 18px;margin-top:8px}
 .shots figure{margin:0}
 .shots figure.big{grid-row:1/3}
+.shots video{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#000}
 .shots img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(60,20,50,.45)}
 .shots figcaption{font:14px/1.4 "Familjen Grotesk",sans-serif;color:var(--soft);margin-top:6px}
 .shots .note{grid-column:1/-1;font:14px "Familjen Grotesk",sans-serif;color:var(--soft);margin:0}
@@ -321,6 +322,7 @@ const projects=[
   more:'Architecture microservices complète : API Gateway, Eureka, Config Server, Keycloak, RabbitMQ.',
   stack:'Java · Spring Boot · PostgreSQL · Docker · Keycloak',
   links:[['Code sur GitHub',GH+'FarahZekri11/ParentConnect/tree/INTEGRATION-FINAL']],
+  video:['parentconnect-demo','Démo : trouver un atelier et y inscrire ses enfants'],
   shots:[['parentconnect-evenements','Liste des événements de quartier, avec filtres et places restantes'],['parentconnect-detail','Détail d\'un événement et formulaire d\'inscription'],['parentconnect-accueil','Page d\'accueil de ParentConnect']]},
  {id:'cardify',name:'Cardify',ctx:'Stage ESPRIT · juin à août 2025',tag:'Réalisé seule',
   text:'Application mobile qui scanne une carte de visite avec l\'appareil photo, reconnaît le texte par OCR et crée un contact structuré : nom, poste, téléphone, e-mail.',
@@ -332,6 +334,7 @@ const projects=[
   more:'Application web et API REST sécurisée par JWT, envoi d\'e-mails, export vers l\'agenda.',
   stack:'PHP · Symfony · Twig · Doctrine · API REST · JWT',
   links:[['Code sur GitHub',GH+'lookism-12/MuseHub/tree/evenement/eya']],
+  video:['musehub-demo','Démo : s\'inscrire à un événement, puis le suivre dans le back-office'],
   shots:[['musehub-evenements','Page publique des événements artistiques'],['musehub-admin-evenements','Back-office : gestion des événements'],['musehub-types','Back-office : types d\'événements et leurs règles']]},
  {id:'wego',name:'weGo',ctx:'Projet académique · 2025',tag:'Projet d\'équipe',
   text:'Application de bureau de covoiturage : publication et recherche de trajets, réservations, paiements et factures, carte des trajets, messagerie et simulation de l\'empreinte CO2.',
@@ -344,7 +347,7 @@ document.getElementById('list').innerHTML=projects.map(p=>`
   <div><span class="meta">${p.ctx}</span><h3>${p.name}</h3><span class="tag">${p.tag}</span></div>
   <div><p>${p.text}</p><p>${p.more}</p><p class="stack-line">${p.stack}</p></div>
   <div class="links">${p.links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>
-  ${p.shots?`<div class="shots">${p.shots.map(([f,alt],i)=>`<figure${i===0?' class="big"':''}><a href="img/${f}.jpg" target="_blank" rel="noopener"><img src="img/${f}.jpg" alt="${alt}" loading="lazy" width="1600" height="1000"></a><figcaption>${alt}</figcaption></figure>`).join('')}<p class="note">Captures de l'application lancée depuis son code, avec des données de démonstration.</p></div>`:''}
+  ${p.shots?`<div class="shots">${p.video?`<figure class="big"><video controls muted playsinline preload="none" poster="video/${p.video[0]}.jpg" width="1280" height="800"><source src="video/${p.video[0]}.mp4" type="video/mp4"></video><figcaption>${p.video[1]}</figcaption></figure>`:''}${(p.video?p.shots.slice(0,2):p.shots).map(([f,alt],i)=>`<figure${i===0&&!p.video?' class="big"':''}><a href="img/${f}.jpg" target="_blank" rel="noopener"><img src="img/${f}.jpg" alt="${alt}" loading="lazy" width="1600" height="1000"></a><figcaption>${alt}</figcaption></figure>`).join('')}<p class="note">${p.video?'Démo et captures':'Captures'} de l'application lancée depuis son code, avec des données de démonstration.</p></div>`:''}
  </article>`).join('');
 
 const S={cv:['CV','CV_Eya_Weslati.pdf'],emv:['Chatbot EMV','#emv'],em:['EspritMarket','#espritmarket'],pc:['ParentConnect','#parentconnect'],card:['Cardify','#cardify'],skills:['Compétences','#competences'],contact:['Contact','#contact'],parc:['Parcours','#parcours']};
