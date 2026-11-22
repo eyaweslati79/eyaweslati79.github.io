@@ -7,7 +7,13 @@
 <meta name="description" content="Eya Weslati, élève ingénieure en génie logiciel à ESPRIT. Full Stack, IA et DevOps : Spring Boot, FastAPI, Angular, RAG, Docker, Kubernetes. À la recherche d'un stage PFE.">
 <meta property="og:title" content="Eya Weslati — Ingénieure logiciel Full Stack · IA · DevOps">
 <meta property="og:description" content="Projets, parcours et compétences. À la recherche d'un stage de fin d'études.">
-<meta property="og:image" content="eya-weslati.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eyaweslati79.github.io/">
+<meta property="og:image" content="https://eyaweslati79.github.io/eya-weslati.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
@@ -20,10 +26,10 @@
 :root{color-scheme:light dark;
  --bg:light-dark(#ffffff,#1a1120);
  --ink:light-dark(#2b1a2e,#f3e6ec);
- --soft:light-dark(#6d5a70,#c2aebb);
+ --soft:light-dark(#655268,#c2aebb);
  --rose:light-dark(#ebcfd7,#3a2432);
  --rose-2:light-dark(#f7e9ed,#24161f);
- --rose-ink:light-dark(#a4566d,#e7a9bd);
+ --rose-ink:light-dark(#954b62,#e7a9bd);
  --teal:light-dark(#1d6863,#7fd0c6);
  --teal-bg:light-dark(#e2f1ef,#173230);
  --line:light-dark(#ead9df,#3a2a36);
@@ -113,7 +119,7 @@ nav a:hover{color:var(--rose-ink)}
 .shots .note{grid-column:1/-1;font:14px "Familjen Grotesk",sans-serif;color:var(--soft);margin:0}
 .feat .shots figcaption{color:var(--bg);opacity:.8}
 .feat .shots img{border-color:transparent;background:#fff}
-@media(max-width:720px){.shots{grid-template-columns:minmax(0,1fr)}.shots figure.big{grid-row:auto}}
+@media(max-width:720px){.shots{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.shots figure.big{grid-row:auto;grid-column:1/-1}.shots figcaption{font-size:13px}}
 
 #first{margin-bottom:clamp(36px,5vw,64px)}
 #first .proj{border-bottom:1px solid var(--line)}
@@ -121,6 +127,12 @@ nav a:hover{color:var(--rose-ink)}
 .award{margin:18px 0 0;max-width:260px}
 .award img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
 .award figcaption{font:14px/1.4 "Familjen Grotesk",sans-serif;color:var(--soft);margin-top:6px}
+
+/* zones de clic agrandies, sans changer l'apparence */
+nav a,.src a,.a sup a,.proj .links a,.clist a,.tl a,.award a{position:relative}
+nav a::after,.src a::after,.a sup a::after,.proj .links a::after,.clist a::after,.tl a::after{content:"";position:absolute;inset:-12px -6px}
+@media(max-width:720px){nav a{padding:10px 0}}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 /* timeline */
 .alt{background:var(--rose-2)}
@@ -156,6 +168,8 @@ footer{padding:22px max(5vw,16px);font:14px "Familjen Grotesk",sans-serif;color:
  .feat,.certs,.contact .wrap,.head{grid-template-columns:minmax(0,1fr)}
  .proj{grid-template-columns:minmax(0,1fr)}
  .proj .links{flex-direction:row;flex-wrap:wrap;gap:16px}
+ .hero .wrap{grid-template-columns:minmax(0,1fr)}
+ .portrait{max-width:380px}
  dl.skills{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:720px){
@@ -191,7 +205,7 @@ footer{padding:22px max(5vw,16px);font:14px "Familjen Grotesk",sans-serif;color:
 <section class="band hero" aria-label="Présentation">
  <div class="wrap">
   <figure class="portrait">
-   <img src="eya-weslati.jpg?v=6" alt="Eya Weslati au Bal des projets d'ESPRIT, devant le stand EspritMarket" width="900" height="1200">
+   <img src="eya-weslati.jpg?v=6" fetchpriority="high" decoding="async" alt="Eya Weslati au Bal des projets d'ESPRIT, devant le stand EspritMarket" width="900" height="1200">
    <figcaption>Korba, Nabeul · Tunisie</figcaption>
   </figure>
   <div class="intro">
@@ -201,10 +215,11 @@ footer{padding:22px max(5vw,16px);font:14px "Familjen Grotesk",sans-serif;color:
     <a class="btn main" href="#contact">Me contacter</a>
     <a class="btn" href="CV_Eya_Weslati.pdf" target="_blank" rel="noopener">Voir mon CV</a>
    </div>
-   <div class="ask" aria-live="polite">
+   <div class="ask">
     <div class="ask-head ui"><span>Posez-moi une question</span><span>Réponses tirées de mon CV et de mes projets</span></div>
     <p class="q" id="q">Qui êtes-vous ?</p>
     <p class="a" id="a"></p>
+    <p class="sr" id="live" aria-live="polite"></p>
     <p class="src" id="src"></p>
     <div class="chips ui" id="chips" role="group" aria-label="Questions suggérées"></div>
    </div>
@@ -380,23 +395,24 @@ const QA=[
  {q:'Travaillez-vous en équipe ?',a:'Oui. Sur ParentConnect, en équipe de 6, j\'ai pris en charge le microservice Events dans une architecture microservices [pc]. EspritMarket, notre grand projet d\'équipe, a remporté le 1er prix du Bal des projets d\'ESPRIT [em].',s:['pc','em']},
  {q:'Êtes-vous disponible ?',a:'Je cherche un stage de fin d\'études (PFE) en Full Stack, IA ou DevOps. Écrivez-moi à aweslati95@gmail.com ou sur LinkedIn [contact].',s:['contact','cv']}
 ];
-const qEl=document.getElementById('q'),aEl=document.getElementById('a'),sEl=document.getElementById('src'),cEl=document.getElementById('chips');
+const live=document.getElementById('live'),qEl=document.getElementById('q'),aEl=document.getElementById('a'),sEl=document.getElementById('src'),cEl=document.getElementById('chips');
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let timer=null;
 const cite=t=>t.replace(/\[(\w+)\]/g,(m,k)=>{const i=Object.keys(S).indexOf(k)+1;return `<sup><a href="${S[k][1]}" aria-label="Source : ${S[k][0]}">${S[k][0]}</a></sup>`});
-const show=i=>{
+const show=(i,announce)=>{
  const item=QA[i];
  qEl.textContent=item.q;
  cEl.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',j===i));
  sEl.innerHTML='Sources : '+item.s.map(k=>`<a href="${S[k][1]}"${k==='cv'?' target="_blank" rel="noopener"':''}>${S[k][0]}</a>`).join('');
  clearInterval(timer);
  const plain=item.a.replace(/\s?\[\w+\]/g,'');
+ if(announce)live.textContent=item.q+' '+plain;
  if(reduce){aEl.innerHTML=cite(item.a);return}
- let n=0;aEl.classList.add('typing');aEl.textContent='';
- timer=setInterval(()=>{n+=3;aEl.textContent=plain.slice(0,n);if(n>=plain.length){clearInterval(timer);aEl.classList.remove('typing');aEl.innerHTML=cite(item.a)}},16);
+ let n=0;aEl.classList.add('typing');aEl.setAttribute('aria-hidden','true');aEl.textContent='';
+ timer=setInterval(()=>{n+=3;aEl.textContent=plain.slice(0,n);if(n>=plain.length){clearInterval(timer);aEl.classList.remove('typing');aEl.removeAttribute('aria-hidden');aEl.innerHTML=cite(item.a)}},16);
 };
 cEl.innerHTML=QA.map((x,i)=>`<button type="button" aria-pressed="false" data-i="${i}">${x.q}</button>`).join('');
-cEl.addEventListener('click',e=>{const b=e.target.closest('button');if(b)show(+b.dataset.i)});
+cEl.addEventListener('click',e=>{const b=e.target.closest('button');if(b)show(+b.dataset.i,true)});
 show(0);
 }
 </script>
