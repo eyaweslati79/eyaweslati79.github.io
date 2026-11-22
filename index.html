@@ -115,6 +115,9 @@ nav a:hover{color:var(--rose-ink)}
 .feat .shots img{border-color:transparent;background:#fff}
 @media(max-width:720px){.shots{grid-template-columns:minmax(0,1fr)}.shots figure.big{grid-row:auto}}
 
+#first{margin-bottom:clamp(36px,5vw,64px)}
+#first .proj{border-bottom:1px solid var(--line)}
+
 /* timeline */
 .alt{background:var(--rose-2)}
 .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,5vw,72px)}
@@ -211,6 +214,8 @@ footer{padding:22px max(5vw,16px);font:14px "Familjen Grotesk",sans-serif;color:
    <h2>Projets</h2>
    <p>Un stage en entreprise, des projets académiques en équipe et une application mobile. Pour chacun : ce que j'ai fait, avec quoi, et où voir le code.</p>
   </div>
+
+  <div id="first"></div>
 
   <article class="feat" id="emv">
    <div>
@@ -352,13 +357,15 @@ const projects=[
   stack:'Java · JavaFX · Maven · MySQL · Twilio · JavaMail',
   links:[['Code sur GitHub',GH+'wassimzarai/weGo']]}
 ];
-document.getElementById('list').innerHTML=projects.map(p=>`
+const card=p=>`
  <article class="proj" id="${p.id}">
   <div><span class="meta">${p.ctx}</span><h3>${p.name}</h3><span class="tag">${p.tag}</span></div>
   <div><p>${p.text}</p><p>${p.more}</p><p class="stack-line">${p.stack}</p></div>
   <div class="links">${p.links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join('')}</div>
   ${p.shots?`<div class="shots">${p.video?`<figure class="big"><video controls playsinline preload="none" poster="video/${p.video[0]}.jpg" width="1280" height="800"><source src="video/${p.video[0]}.mp4" type="video/mp4"></video><figcaption>${p.video[1]}</figcaption></figure>`:''}${(p.video?p.shots.slice(0,2):p.shots).map(([f,alt],i)=>`<figure${i===0&&!p.video?' class="big"':''}><a href="img/${f}.jpg" target="_blank" rel="noopener"><img src="img/${f}.jpg" alt="${alt}" loading="lazy" width="1600" height="1000"></a><figcaption>${alt}</figcaption></figure>`).join('')}<p class="note">${p.note||((p.video?'Démo et captures':'Captures')+' de l\'application lancée depuis son code, avec des données de démonstration.')}</p></div>`:''}
- </article>`).join('');
+ </article>`;
+document.getElementById('first').innerHTML=card(projects[0]);
+document.getElementById('list').innerHTML=projects.slice(1).map(card).join('');
 
 const S={cv:['CV','CV_Eya_Weslati.pdf'],emv:['Chatbot EMV','#emv'],em:['EspritMarket','#espritmarket'],pc:['ParentConnect','#parentconnect'],card:['Cardify','#cardify'],skills:['Compétences','#competences'],contact:['Contact','#contact'],parc:['Parcours','#parcours']};
 const QA=[
