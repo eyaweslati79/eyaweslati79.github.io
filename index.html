@@ -111,6 +111,8 @@ nav a:hover{color:var(--rose-ink)}
 .shots img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);box-shadow:0 14px 30px -22px rgba(60,20,50,.45)}
 .shots figcaption{font:14px/1.4 "Familjen Grotesk",sans-serif;color:var(--soft);margin-top:6px}
 .shots .note{grid-column:1/-1;font:14px "Familjen Grotesk",sans-serif;color:var(--soft);margin:0}
+.feat .shots figcaption{color:var(--bg);opacity:.8}
+.feat .shots img{border-color:transparent;background:#fff}
 @media(max-width:720px){.shots{grid-template-columns:minmax(0,1fr)}.shots figure.big{grid-row:auto}}
 
 /* timeline */
@@ -216,18 +218,23 @@ footer{padding:22px max(5vw,16px);font:14px "Familjen Grotesk",sans-serif;color:
     <h3>Chatbot EMV : poser une question à 558 pages de spécifications</h3>
     <p>Les développeurs et nouveaux arrivants perdaient du temps à chercher dans la documentation technique EMV. J'ai conçu un assistant qui répond en citant ses sources, et qui refuse de répondre quand la question sort de la documentation.</p>
     <ul>
-     <li>Pipeline documentaire complet : extraction PDF, découpage, embeddings, recherche vectorielle dans Qdrant, génération par un LLM.</li>
-     <li>API REST Java/Spring Boot de 22 endpoints, service IA en Python/FastAPI, interface Angular, MongoDB.</li>
-     <li>100 tests automatisés et un jeu de 30 questions pour mesurer la qualité des réponses.</li>
+     <li>Pipeline RAG complet : extraction PDF avec reconstruction des tableaux, découpage par section, embeddings calculés en local, recherche vectorielle dans Qdrant.</li>
+     <li>Chaque réponse cite les passages mot pour mot, avec la section et la page. Un LLM externe a été testé puis écarté : aucune reformulation, et aucune donnée envoyée hors de l'entreprise.</li>
+     <li>API REST Java/Spring Boot sécurisée par JWT, service IA en Python/FastAPI, interface Angular, MongoDB, avec tests JUnit et pytest.</li>
     </ul>
-    <p class="stack-line">Spring Boot · FastAPI · Angular · MongoDB · Qdrant · LLM · Docker</p>
-    <p class="stack-line" style="margin-top:10px">Code privé, propriété de l'entreprise.</p>
+    <p class="stack-line">Spring Boot · FastAPI · Angular · MongoDB · Qdrant · Sentence-Transformers · Docker</p>
+    <p class="stack-line" style="margin-top:10px">Code privé, propriété de l'entreprise. Captures issues de mon rapport de stage.</p>
    </div>
    <div class="figs" aria-label="Résultats mesurés">
     <div><b>~2,2 s</b><span>par réponse sourcée</span></div>
     <div><b>90 %</b><span>de réponses correctes sur 30 questions de test</span></div>
     <div><b>100 %</b><span>de refus corrects hors périmètre</span></div>
     <div><b>558</b><span>pages, 3 spécifications indexées</span></div>
+   </div>
+   <div class="shots">
+    <figure class="big"><a href="img/emv-reponse-sources.jpg" target="_blank" rel="noopener"><img src="img/emv-reponse-sources.jpg" alt="Réponse du chatbot à « What is Terminal Risk Management? », avec les passages cités et leur source" loading="lazy" width="1495" height="711"></a><figcaption>Réponse sourcée : passages cités mot pour mot, avec section et page</figcaption></figure>
+    <figure><a href="img/emv-reponse-tableau.jpg" target="_blank" rel="noopener"><img src="img/emv-reponse-tableau.jpg" alt="Réponse contenant le tableau des bits de l'AIP" loading="lazy" width="1487" height="701"></a><figcaption>Les tableaux de la spécification restent lisibles</figcaption></figure>
+    <figure><a href="img/emv-architecture.jpg" target="_blank" rel="noopener"><img src="img/emv-architecture.jpg" alt="Architecture : Angular, Spring Boot, FastAPI, Qdrant et MongoDB" loading="lazy" width="1398" height="451"></a><figcaption>Architecture de la solution</figcaption></figure>
    </div>
   </article>
 
